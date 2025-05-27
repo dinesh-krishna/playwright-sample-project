@@ -38,3 +38,37 @@ test(`${data3.TestID} - ${data3.Description}`, async ({ page }) => {
     await home.validateLogin(data3.UserName);
     await home.logout();
 });
+
+
+const data4 = ExcelUtil.getTestData(SHEET, "TC04_ValidLogin");
+test(`${data4.TestID} - ${data4.Description}`, async () => {
+    Allure.attachDetails(data4.Description, data4.Issue);
+    await home.launchApplication();
+    await home.login(data4.UserName, data4.Password);
+    await home.validateLogin(data4.UserName);
+    await home.logout();
+});
+
+const data5 = ExcelUtil.getTestData(SHEET, "TC05_InValidLogin");
+test(`${data5.TestID} - ${data5.Description}`, async () => {
+    Allure.attachDetails(data5.Description, data5.Issue);
+    await home.launchApplication();
+    await home.login(data5.UserName, data5.Password);
+    await home.validateInvalidLogin(data5.ErrorMessage);
+});
+
+const data6 = ExcelUtil.getTestData(SHEET, "TC06_LoginCreateAccount");
+test(`${data6.TestID} - ${data6.Description}`, async ({ page }) => {
+    Allure.attachDetails(data6.Description, data6.Issue);
+    await home.launchApplication();
+    await home.navigateToCreateAccount();
+    const register = new RegistrationSteps(page);
+    await register.alreadyHaveAccount();
+    await home.enterLoginDetails(data6.UserName, data6.Password);
+    await home.validateLogin(data6.UserName);
+    await home.logout();
+});
+
+
+
+

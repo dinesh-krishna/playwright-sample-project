@@ -1,0 +1,54 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+    const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  await page.goto('https://nbcusales--uat.sandbox.my.salesforce.com/');
+  await page.getByRole('textbox', { name: 'Username' }).click();
+  await page.getByRole('textbox', { name: 'Username' }).fill('dineshk.krishnamurthy@nbcuni.com.uat');
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill('*Gtrc$1234');
+  await page.getByRole('button', { name: 'Log In to Sandbox' }).click();
+  await page.goto('https://nbcusales--uat.sandbox.lightning.force.com/lightning/o/UserAppMenuItem/home');
+  //await page.getByRole('tab', { name: 'Loading... Loading...' }).press('NumLock');
+  await page.getByRole('button', { name: 'Show Navigation Menu' }).click();
+  await page.getByRole('menuitem', { name: 'Deals' }).click();
+  await page.getByRole('button', { name: 'New' }).click();
+  await page.getByLabel('*Deal Stage').selectOption('RFP');
+  await page.getByRole('textbox', { name: '*Deal Name' }).click();
+  await page.getByRole('textbox', { name: '*Deal Name' }).fill('AutoDeal23Apr');
+  await page.getByRole('textbox', { name: '*Start Date' }).click();
+  await page.getByRole('button', { name: '23' }).click();
+  await page.getByRole('textbox', { name: '*Start Date' }).click();
+  await page.getByRole('button', { name: '23' }).click();
+  await page.getByRole('textbox', { name: '*Start Date' }).press('NumLock');
+  await page.getByRole('textbox', { name: '*End Date' }).click();
+  await page.getByLabel('-04-30').getByRole('button', { name: '30' }).click();
+  await page.getByRole('combobox', { name: '*Agency' }).click();
+  await page.getByRole('combobox', { name: '*Agency' }).fill('google');
+  await delay(3000);
+  await page.getByTitle('Google, INC - AGENCY').click();
+  await page.getByRole('combobox', { name: '*Advertiser' }).click();
+  await page.getByRole('combobox', { name: '*Advertiser' }).fill('google');
+  await page.locator('#combobox-input-791-1-791 span').filter({ hasText: /^Client$/ }).click();
+  await page.getByRole('combobox', { name: '*AE' }).click();
+  await page.getByRole('combobox', { name: '*AE' }).fill('david allen');
+  await page.getByText('Allen', { exact: true }).click();
+  await page.getByRole('combobox', { name: '*Planner' }).click();
+  await page.getByRole('combobox', { name: '*Planner' }).fill('marcus');
+  await page.getByTitle('Marcus Acevedo').click();
+  await page.getByText('*Deal Logged ByNational*Deal').click();
+  await page.getByText('*Deal Logged ByNational*Deal').click();
+  await page.getByRole('textbox', { name: '*End Date' }).press('Escape');
+  await page.getByText('One Platform (Digital)').click();
+  await page.getByRole('button', { name: 'Move to Chosen Move selection' }).click();
+  await page.getByRole('textbox', { name: 'search..' }).click();
+  await page.getByText('Anzu - Video - Digital Media').click();
+  await page.getByRole('textbox', { name: '$' }).click();
+  await page.getByRole('textbox', { name: '$' }).fill('5000');
+  await page.locator('div').filter({ hasText: /^Save$/ }).getByRole('button').click();
+  await page.locator('div').filter({ hasText: /^Save$/ }).getByRole('button').press('NumLock');
+  //await page.goto('https://nbcusales--uat.sandbox.lightning.force.com/lightning/r/Deal__c/a08Wr00000CsELdIAN/view');
+  await page.getByRole('button', { name: 'View profile' }).click();
+  await page.getByRole('link', { name: 'Log Out' }).click();
+});
